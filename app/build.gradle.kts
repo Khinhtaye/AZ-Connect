@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation(files("libs/libv2ray.aar"))
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")

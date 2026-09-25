@@ -56,7 +56,11 @@ class AZVpnService : VpnService() {
             vpnInterface = builder.establish()
             Log.i(TAG, "VPN interface established")
 
-            // TODO: Xray core native binding
+            val started = XrayCoreManager.start(configJson, vpnInterface)
+            if (!started) {
+                Log.e(TAG, "Xray core failed to start")
+                stopVpn()
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to start VPN", e)
         }
@@ -64,6 +68,7 @@ class AZVpnService : VpnService() {
 
     private fun stopVpn() {
         try {
+            XrayCoreManager.stop()
             vpnInterface?.close()
             vpnInterface = null
             Log.i(TAG, "VPN stopped")
